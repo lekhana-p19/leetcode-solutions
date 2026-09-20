@@ -1,24 +1,38 @@
-## Problem: Addition of Two Numbers
-**Link:** Local Implementation
+## Problem: Two Sum (Easy)
 
-### Approach
-The program reads two integers from the user using `scanf()` and stores them in memory variables. It then applies the arithmetic addition operator `+` to compute their total and prints the result back to the console screen.
+**Link:** [My Accepted Solution – Two Sum](https://leetcode.com/problems/two-sum/submissions/2147620425/)
 
-### Complexity
-- Time: O(1) because the mathematical calculation takes constant execution time.
-- Space: O(1) as it only allocates a fixed number of integer storage variables.
+# Intuition
+The simplest way to find two numbers that add up to a target is to check every possible pair in the array one by one.
 
-### Notes
-Used simple sequential inputs to ensure clear step-by-step reading from standard keyboard input without complex data structures.
+# Approach
+Used a brute force approach with nested loops to check every potential pair of items in the array. When two values add up directly to the goal target, their indices are assigned to a global array structure to prevent pointer expiration, and execution terminates immediately.
 
-**Link:** https://leetcode.com
+# Complexity
+- Time complexity: $O(N^2)$ due to the nested iteration scanning all unique index pairs.
+- Space complexity: $O(1)$ because the elements are processed in place inside a fixed-size global array structure.
 
-### Approach
-Used a brute force approach with nested loops to check every potential pair of items in the array. When two values add up directly to the goal target, their indices are packed into memory and returned immediately.
+# Notes
+Declared the result array globally outside the function scope to ensure its memory remains allocated for the LeetCode runtime environment without using dynamic memory allocation (`malloc`) or `static` keywords.
 
-### Complexity
-- Time: O(N^2)
-- Space: O(1)
+# Code
+```c
+// Global array declared outside the function so it stays alive in memory
+int global_result[2];
 
-### Notes
-Confirmed that returnSize must be correctly populated inside the function block so the validation engine handles the array boundary properly.
+int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
+    *returnSize = 2;
+
+    for (int i = 0; i < numsSize; i++) {
+        for (int j = i + 1; j < numsSize; j++) {
+            if (nums[i] + nums[j] == target) {
+                global_result[0] = i;
+                global_result[1] = j;
+                return global_result;
+            }
+        }
+    }
+
+    *returnSize = 0;
+    return NULL;
+}
