@@ -18,17 +18,27 @@ void moveZeroes(int *nums, int numsSize)
 
 int main()
 {
-    int nums[] = {0, 1, 0, 3, 12};
-    int size = 5;
+    // Test 1
+    int nums1[] = {0, 1, 0, 3, 12};
 
-    moveZeroes(nums, size);
+    moveZeroes(nums1, 5);
 
-    printf("Array after moving zeroes: ");
+    printf("Test 1: ");
+    for (int i = 0; i < 5; i++)
+        printf("%d ", nums1[i]);
 
-    for (int i = 0; i < size; i++)
-    {
-        printf("%d ", nums[i]);
-    }
+    printf("\n");
+
+    // Test 2
+    int nums2[] = {1, 2, 3};
+
+    moveZeroes(nums2, 3);
+
+    printf("Test 2: ");
+    for (int i = 0; i < 3; i++)
+        printf("%d ", nums2[i]);
+
+    printf("\n");
 
     return 0;
 }
