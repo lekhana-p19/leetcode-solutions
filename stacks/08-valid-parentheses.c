@@ -8,34 +8,26 @@ bool isValid(char *s)
 
     for (int i = 0; s[i] != '\0'; i++)
     {
-
         if (s[i] == '(' || s[i] == '{' || s[i] == '[')
         {
-            stack[++top] = s[i];
+            top++;
+            stack[top] = s[i];
         }
         else
         {
             if (top == -1)
-            {
                 return false;
-            }
 
-            char open = stack[top--];
-
-            if (s[i] == ')' && open != '(')
-            {
+            if (s[i] == ')' && stack[top] != '(')
                 return false;
-            }
 
-            if (s[i] == '}' && open != '{')
-            {
+            if (s[i] == '}' && stack[top] != '{')
                 return false;
-            }
 
-            if (s[i] == ']' && open != '[')
-            {
+            if (s[i] == ']' && stack[top] != '[')
                 return false;
-            }
+
+            top--;
         }
     }
 
@@ -44,16 +36,11 @@ bool isValid(char *s)
 
 int main()
 {
-    char s[] = "()[]{}";
+    char s1[] = "()[]{}";
+    char s2[] = "(]";
 
-    if (isValid(s))
-    {
-        printf("Valid Parentheses\n");
-    }
-    else
-    {
-        printf("Invalid Parentheses\n");
-    }
+    printf("Test 1: %s\n", isValid(s1) ? "Valid" : "Invalid");
+    printf("Test 2: %s\n", isValid(s2) ? "Valid" : "Invalid");
 
     return 0;
 }
